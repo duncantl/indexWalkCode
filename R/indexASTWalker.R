@@ -13,26 +13,11 @@
 # update the language objects. 
 #
 
-mkIsCallTo =
-    # Create a predicate function that checks if the AST object is
-    # a call to the specified function.
-    # This captures fun and returns a function which can be used as the predicate
-    # function in walkCode or indexWalkCode.
-function(fun)    
-    function(x, ...)  # idx, type, ast) 
-        is.call(x) && isSymbol(x[[1]], fun)
-
-isSymbol =
-    # Copied from CodeAnalysis. Need to rationalize.
-function (x, sym) 
-is.name(x) && as.character(x) %in% sym
-
 
 indexWalkCode =
     #
-    #
-    #
-    #
+    # The entry point to walk the AST and return the list of IndexPaths
+    # 
 function(code, pred)
 {
     w = mkIndexWalker(pred, code)
@@ -51,37 +36,25 @@ function(pred, ast)
             lapply(seq(along.with = x), function(i) walkCode2(x[[i]], w, c(idx, i), type))
             return(NULL)
         } else if(ty == "closure") {
-            walkCode2(formals(x), w, idx, "formals") # lapply(formals(x), walkCode, w)
+            walkCode2(formals(x), w, idx, "formals") 
             walkCode2(body(x), w, idx, "body")
-        } else if(ty == "symbol")
-            pred(x, idx, type, ast)
+        } else if(ty == "symbol") {
+            if(pred(x, idx, type, ast))
+                capture(idx, type, x)
+        }
 
         NULL
     }
 
-    capture =
-        function(idx, type) {
-            #            browser()
-            klass = switch(type,
-                           "body" = "BodyIndex",
-                           "formals" = "FormalsIndex",
-                           "BasicIndex")
-            
-            idx = c(if(is.na(type) || type == "")
-                       NA
-                    else if(type == "body")
-                        1L
-                    else 0L,
-                    idx)
+    capture = function(idx, type, x = NULL)  {
+        ans[[ length(ans) + 1L]] <<-  mkIndexPath(idx, type)
+        if(!is.null(x))
+           names(ans)[ length(ans) ] <<-  paste(deparse(x), collapse = "")
+    }
 
-            class(idx) = c(klass, "IndexPath")
-            ans[[ length(ans) + 1L]] <<- idx
-        }
-    
-    
     call = function(x, w, idx, type) {
         if(pred(x, idx, type, ast))
-            capture(idx, type)
+            capture(idx, type, x)
 
         tmp = as.list(x)
         for(i in seq(along.with = tmp)) {
@@ -94,9 +67,9 @@ function(pred, ast)
     list(handler = function(...) NULL,
          call = call,
          leaf = leaf,
-         ans = function() {
+         ans = function() 
                  ans
-             })    
+         )   
 }
 
 
