@@ -3,7 +3,7 @@ function(x, ast, idx, type = NA)
 {
     tmp = getIndexObj(ast, idx, type)
 
-    comp = getComponent(idx, type)
+    comp = getASTComponent(idx, type)
     comp = if(comp == "") "ast" else sprintf("%s(ast)", comp)
     txt = sprintf("%s%s <- x",
                   comp, 
