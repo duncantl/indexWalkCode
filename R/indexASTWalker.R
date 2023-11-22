@@ -14,12 +14,25 @@
 #
 
 mkIsCallTo =
+    # Create a predicate function that checks if the AST object is
+    # a call to the specified function.
+    # This captures fun and returns a function which can be used as the predicate
+    # function in walkCode or indexWalkCode.
 function(fun)    
-    function(x, idx, type, ast) 
-        is.call(x) && is.name(x[[1]]) && as.character(x[[1]]) %in% fun
+    function(x, ...)  # idx, type, ast) 
+        is.call(x) && isSymbol(x[[1]], fun)
+
+isSymbol =
+    # Copied from CodeAnalysis. Need to rationalize.
+function (x, sym) 
+is.name(x) && as.character(x) %in% sym
 
 
 indexWalkCode =
+    #
+    #
+    #
+    #
 function(code, pred)
 {
     w = mkIndexWalker(pred, code)
@@ -49,7 +62,6 @@ function(pred, ast)
     capture =
         function(idx, type) {
             #            browser()
-
             klass = switch(type,
                            "body" = "BodyIndex",
                            "formals" = "FormalsIndex",
@@ -88,99 +100,5 @@ function(pred, ast)
 }
 
 
-getIndexObj = 
-function(ast, idx, type = NA, dropSelf = TRUE)
-{    
-    obj = if(is.na(type)) {
-              ty = idx[1]
-              idx = idx[-1]
-              if(is.na(ty))
-                  ast
-              else switch(as.character(ty),
-                     "0" = formals(ast),
-                     "1" = body(ast),
-                     ast)
-          } else               
-              switch(type,
-                     body = body(ast),
-                     formals = formals(ast),
-                     ast)
 
-    if(dropSelf)
-        idx = idx[ - length(idx)]
-
-    list(obj = obj, idx = idx)
-}
-
-getComponent =
-function(idx, type = NA)    
-{
-    if(is.na(type)) {
-        ty = idx[1]
-         switch(as.character(ty),
-               "0" = "formals",
-               "1" = "body",
-                "")
-    } else               
-        switch(type,
-               body = "body",
-               formals = "formals",
-               "")    
-}
-
-insertByIndex =
-function(x, ast, idx, type = NA)
-{
-    tmp = getIndexObj(ast, idx, type)
-
-    comp = getComponent(idx, type)
-    comp = if(comp == "") "ast" else sprintf("%s(ast)", comp)
-    txt = sprintf("%s%s <- x",
-                  comp, 
-                  paste(sprintf("[[ %d ]]", c(tmp$idx, idx[length(idx)])), collapse = "" ))
-    e = parse(text = txt)
-
-    val = eval(e, sys.frame(sys.nframe()))
-    ast
-}
-
-
-getByIndex =
-function( ast, idx, type = NA)
-{
-    p = getParent(ast, idx, type)
-    p[[ idx[ length(idx) ] ]]
-}
-
-getParent =
-function(ast, idx, type = NA)
-{
-    tmp = getIndexObj(ast, idx, type)
-
-    obj = tmp$obj
-    for(i in tmp$idx)
-        obj = obj[[i]]
-
-    obj
-}
-
-getAncestors =
-    #
-    # Need to enhance to handle when type is NA and the type is the first element
-    # of idx. Same as getParent().
-    #
-function(ast, idx, type = NA)
-{
-    tmp = getIndexObj(ast, idx, type)
-    
-    orig = obj = tmp$obj
-    idx = tmp$idx
-    
-    ans = vector("list", length(idx))
-    for(i in seq(along.with = idx) )
-        ans[[i]] = obj = obj[[i]]
-
-    # add the body or parameter and then the ast itself.
-    rev(c(ast, orig, ans))
-}
 
