@@ -12,7 +12,6 @@
 # functions - formals and body - to add parameters to calls.  I used rstatic to be able to
 # update the language objects. 
 #
-#
 
 if(FALSE) {
     f = function(x, y = do.call(foo, x))  x + y
@@ -119,7 +118,7 @@ indexWalkCode =
 function(code, pred)
 {
     w = mkIndexWalker(pred, code)
-    walkCode2(code, w, idx = integer(), type = NA)
+    walkCode2(code, w, idx = integer(), type = "")
     w$ans()
 }
 
@@ -144,13 +143,21 @@ function(pred, ast)
 
     capture =
         function(idx, type) {
-#            browser()
-            idx = c(if(is.na(type))
+            #            browser()
+
+            klass = switch(type,
+                           "body" = "BodyIndex",
+                           "formals" = "FormalsIndex",
+                           "BasicIndex")
+            
+            idx = c(if(is.na(type) || type == "")
                        NA
                     else if(type == "body")
                         1L
                     else 0L,
                     idx)
+
+            class(idx) = c(klass, "IndexPath")
             ans[[ length(ans) + 1L]] <<- idx
         }
     
