@@ -1,10 +1,12 @@
+library(indexWalkCode)
+
     # example of rewriting calls to order() to add decreasing = decreasing and na.last = na.last
     # Comes from copyParameters.R example.
 
-# Need eg3 as a function.
+    # Need eg3 as a function.
 ff = system.file("sampleCode/eg.R", packge = "indexWalkCode")
 source(ff)
-# Was in if(FALSE)    eval(parse("~/GitWorkingArea/CodeAnalysis/R/indexASTWalker.R")[[1]][[3]])
+    # Was in if(FALSE)    eval(parse("~/GitWorkingArea/CodeAnalysis/R/indexASTWalker.R")[[1]][[3]])
 
     # Find the locations of the direct calls to order in the body.
     # Get the call objects using the indices.
