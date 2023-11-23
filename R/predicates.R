@@ -10,8 +10,8 @@ function(fun)
 
 isSymbol =
     # Copied from CodeAnalysis. Need to rationalize.
-function (x, varName) 
-   is.name(x) && as.character(x) %in% varName
+function (x, varName = character()) 
+   is.name(x) && ((length(varName) == 0) || as.character(x) %in% varName)
 
 
 
