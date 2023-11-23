@@ -49,7 +49,7 @@ getIndexObj =
     # Which part of the ast - body, formals or the entire ast
     # and the index but that is less important now.
     #
-function(ast, idx, type = NA, dropSelf = TRUE)
+function(ast, idx, dropSelf = TRUE)
 {
     obj = switch(class(idx)[1],
                  BodyIndex = body(ast),
