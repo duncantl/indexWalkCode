@@ -20,17 +20,14 @@ getByIndex(ast, idx, type = NA)
 \value{
  An element from the code, i.e., a  language object or a literal value.
 }
-\references{
-}
+%\references{}
 \author{
 Duncan Temple Lang
 }
 \seealso{
 \code{\link{indexWalkCode}}
 }
-\examples{
-
-}
+\examples{}
 \keyword{programming}
 \concept{metaprogramming}
 

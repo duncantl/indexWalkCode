@@ -5,12 +5,17 @@
 \alias{isSymbol}
 \title{Predicate functions useful for find nodes in R code via \code{indexWalkCode}}
 \description{
+  These predicate functions are building blocks to writing
+  predicate functions for identifying nodes in R code/Abstract Syntax Trees (ASTs).
+
+  \code{mkIsCallTo} creates a predicate that tests for a call to any of a set of
+  R functions.
 }
 \usage{
 isCallTo(code, funName)
-mkIsCallTo(fun)
 isSymbol(x, varName)
 isAssignTo(code, varName)
+mkIsCallTo(fun)
 }
 \arguments{
   \item{x,code}{the R call object}
@@ -33,6 +38,23 @@ Duncan Temple Lang
   \code{\link{indexWalkCode}}
 }
 \examples{
+  isCallTo(quote(foo(x)), "foo")
+  isCallTo(quote(foo(x)), c("foo", "bar"))
+  isCallTo(quote(other(x)), c("foo", "bar"))
+
+  isSymbol( quote(x), "x")
+  isSymbol( quote(x), "foo")
+  isSymbol( quote(x) )
+
+  isAssignTo( quote( x <- foo(y)) , "x")
+  isAssignTo( quote( x <- foo(y)) , "y")
+
+  e = parse(text = "x = 1")[[1]]
+  isAssignTo( e , "x")
+
+  p = mkIsCallTo("list.files")
+  i = indexWalkCode(tools:::.check_packages, p)
 }
+%  i = codetools::walkCode(tools:::.check_packages, p)
 \keyword{programming}
 \concept{metaprogramming}

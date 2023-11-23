@@ -2,6 +2,16 @@
 \alias{indexWalkCode}
 \title{Walk R code to identify elements and get the indices to those elements}
 \description{
+  Traverse the R code/Abstract Syntax Tree (AST) and find
+  nodes identified by the predicate function (\code{pred})
+  and return a list of \code{IndexPath}
+  that identify these specific nodes.
+  These \code{IndexPath} can then be used to
+  rewrite the AST.
+
+  The \code{IndexPath} objects can also be used by the predicate
+  function to query "up" the tree, i.e., the parent, ancestors
+  and siblings of the current node.
 }
 \usage{
 indexWalkCode(code, pred, collectCode = FALSE, w =

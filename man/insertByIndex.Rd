@@ -2,6 +2,8 @@
 \alias{insertByIndex}
 \title{Rewrite part of an R AST using an index to the node.}
 \description{
+  Replace the node identified by the specified index
+  in an R language object/abstract syntax tree (AST).
 }
 \usage{
 insertByIndex(x, ast, idx, type = NA, rmSrcref = TRUE)
@@ -29,6 +31,25 @@ Duncan Temple Lang
 \code{\link{indexWalkCode}}
 }
 \examples{
+   f = function(x, y) {
+        a = foo(x)
+        b = foo(y)
+
+        foo(a + b)
+   }
+
+   idx = indexWalkCode(f, mkIsCallTo("foo"))
+
+   f2 = f
+   for(i in idx) {
+      k = getByIndex(f2, i)
+      k$otherArg = TRUE
+      f2 = insertByIndex(k, f2, i)
+   }
+
+   f2
+
+   indexWalkCode(f2, mkIsCallTo("foo"), collectCode = TRUE)$code
 }
 \keyword{programming}
 \concept{metaprogramming}
