@@ -3,7 +3,7 @@
 # The changes are adding ... in the function signature and in the calls to the different handlers.
 # These walker-specific functions have to accept these additional arguments.
 walkCode2 =
-function (e, w = makeCodeWalker(), ...) 
+function (e, w, ...) 
 {
     if (typeof(e) == "language") {
         if (typeof(e[[1]]) %in% c("symbol", "character")) {
