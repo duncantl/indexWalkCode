@@ -1,5 +1,5 @@
 Package: indexWalkCode
-Title: Walk R code with ability to query up the tree and sideways.
+Title: Walk R code with ability to query up the tree and sideways
 Description: # This is an experiment in creating a version of walkCode() from codetools
  that allows us to collect indices if elements in the AST that match some criteria.
  The intent is to be able to use these indices to
@@ -9,4 +9,5 @@ Description: # This is an experiment in creating a version of walkCode() from co
 Version: 0.1-0
 Author: Duncan Temple Lang, Luke Tierney and R-core for the codetools::walkCode function.
 Maintainer: Duncan Temple Lang <duncan@r-project.org>
-License: GPL2
+License: GPL-2
+
