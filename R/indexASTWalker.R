@@ -41,7 +41,7 @@ function(pred, ast, collectCode = FALSE)
             walkCode2(body(x), w, idx, "body")
         } else if(ty == "symbol") {
             idx = mkIndexPath(idx, type)
-            if(pred(x, idx, type, ast))
+            if(pred(x, idx, ast, type))
                 capture(idx, type, x)
         }
 
@@ -58,7 +58,7 @@ function(pred, ast, collectCode = FALSE)
 
     call = function(x, w, idx, type) {
         idx = mkIndexPath(idx, type)
-        if(pred(x, idx, type, ast))
+        if(pred(x, idx, ast, type))
             capture(idx, type, x)
 
         tmp = as.list(x)
