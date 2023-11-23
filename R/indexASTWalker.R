@@ -32,7 +32,7 @@ function(pred, ast)
 
     leaf = function(x, w, idx, type) {
         ty = typeof(x)
-        if(ty == "pairlist" || ty == "list") {
+        if(ty %in% c("pairlist", "list", "expression")) {
             lapply(seq(along.with = x), function(i) walkCode2(x[[i]], w, c(idx, i), type))
             return(NULL)
         } else if(ty == "closure") {
