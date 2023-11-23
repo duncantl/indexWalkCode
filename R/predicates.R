@@ -10,8 +10,8 @@ function(fun)
 
 isSymbol =
     # Copied from CodeAnalysis. Need to rationalize.
-function (x, sym) 
-   is.name(x) && as.character(x) %in% sym
+function (x, varName) 
+   is.name(x) && as.character(x) %in% varName
 
 
 
