@@ -4,7 +4,8 @@
 \description{
 }
 \usage{
-indexWalkCode(code, pred)
+indexWalkCode(code, pred, collectCode = FALSE, w =
+              mkIndexWalker(pred, code, collectCode))
 }
 \arguments{
   \item{code}{any R code} %  or an environment
@@ -14,7 +15,13 @@ indexWalkCode(code, pred)
     the type of this index path and the top-level AST.
     This function must return \code{TRUE} or \code{FALSE}.
     The function can query the parent node, ancestors and siblings.
-   }
+  }
+  \item{w}{the list of code walker handlers}
+  \item{collectCode}{a logical value controlling whether to also
+    collect the actual nodes in the AST corresponding to the
+    elements the predicate identifies, along with the list of \code{IndexPath}
+    objects.
+  }
 }
 \value{
 A list of \code{IndexPath} objects.

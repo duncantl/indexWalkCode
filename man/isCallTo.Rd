@@ -8,10 +8,15 @@
 }
 \usage{
 isCallTo(code, funName)
+mkIsCallTo(fun)
+isSymbol(x, varName)
+isAssignTo(code, varName)
 }
 \arguments{
-  \item{code}{}
-  \item{funName}{}
+  \item{x,code}{the R call object}
+  \item{fun,funName}{a character vector of names of functions
+    we want to match.}
+  \item{varName}{a character vector of the names of variables we want to match.}
 }
 \value{
   \code{mkIsCallTo} returns a function.
