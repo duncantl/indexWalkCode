@@ -14,6 +14,13 @@ functions - formals and body - to add parameters to calls.  I used rstatic to be
 update the language objects. 
 
 
+One can use this package in the same way as `walkCode()` in `codetools`
+to walk the code and ignore the return value, but still use the ability
+to walk up the tree within predicate functions.
+
+Additionally, this allows one to specify a predicate function 
+a not have to write the general code walker function.
+
 ## IndexPath
 
 The \code{IndexPath} is a simple integer vector giving us the sequence
