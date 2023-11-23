@@ -11,6 +11,9 @@ pred2 = function(x, idx, type, ast) {
         isSymbol(p[[2]], "order" )
 }
 
+ff = system.file("sampleCode/eg.R", package = "indexWalkCode")
+source(ff)
+
 idx = indexWalkCode(body(eg3), pred2)
 
 getByIndex(body(eg3), idx[[1]])

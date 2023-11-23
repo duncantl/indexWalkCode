@@ -4,7 +4,7 @@ library(indexWalkCode)
     # Comes from copyParameters.R example.
 
     # Need eg3 as a function.
-ff = system.file("sampleCode/eg.R", packge = "indexWalkCode")
+ff = system.file("sampleCode/eg.R", package = "indexWalkCode")
 source(ff)
     # Was in if(FALSE)    eval(parse("~/GitWorkingArea/CodeAnalysis/R/indexASTWalker.R")[[1]][[3]])
 
