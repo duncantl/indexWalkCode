@@ -28,10 +28,11 @@ Duncan Temple Lang
   \code{\link{getSiblings}}  
 }
 \examples{
-   f = indexWalkCode:::indexWalkCode
+   f = indexWalkCode:::mkIndexWalker
    i = indexWalkCode(f,  mkIsCallTo("pred"))
    i
    getByIndex(f, i[[1]])
+   getParent(f, i[[1]])
 }
 \keyword{programming}
 \concept{metaprogramming}
