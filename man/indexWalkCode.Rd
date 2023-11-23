@@ -22,9 +22,11 @@ indexWalkCode(code, pred, collectCode = FALSE, w =
   \item{pred}{a predicate function used to identify each element
     of interest whose index path is to be returned.
     This is called with the node in the AST, the index path to the current node,
-    the type of this index path and the top-level AST.
+    the top-level AST and the type of this index path (which can be ignored.)
     This function must return \code{TRUE} or \code{FALSE}.
     The function can query the parent node, ancestors and siblings.
+    One should write predicate functions with a signature
+     \code{function(node, index, ast, ...)}
   }
   \item{w}{the list of code walker handlers}
   \item{collectCode}{a logical value controlling whether to also

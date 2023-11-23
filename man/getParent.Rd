@@ -18,6 +18,8 @@ getSiblings(ast, idx, before = TRUE, type = NA)
   \item{idx}{the \code{IndexPath} identifying the node in the tree.}
   \item{type}{should not be necessary.
     The type passed to the predicate function in calls from \code{\link{indexWalkCode}}}
+  \item{self}{a logical value. If \code{TRUE}, \code{getAncestors} includes
+   the actual node in the results; otherwise, only the parent and its parents, etc. are returned}
   \item{before}{a logical value. If \code{TRUE}, \code{getSiblings} returns
     the sibling nodes before the current node; otherwise, the nodes after the current node.
   }

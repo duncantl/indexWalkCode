@@ -20,14 +20,26 @@ getByIndex(ast, idx, type = NA)
 \value{
  An element from the code, i.e., a  language object or a literal value.
 }
-%\references{}
 \author{
 Duncan Temple Lang
 }
 \seealso{
-\code{\link{indexWalkCode}}
+  \code{\link{indexWalkCode}}
 }
-\examples{}
+\examples{
+  f = function(x, b) {
+         if(b > 0)
+            foo(x)
+
+         foo(bar(x))
+   }  
+
+   p = function(x, idx, ast, ...) 
+          isCallTo(x, "foo") && isCallTo(getParent(ast, idx), "if")
+   i = indexWalkCode(f, p)
+
+   getByIndex(f, i[[1]])
+}
 \keyword{programming}
 \concept{metaprogramming}
 
