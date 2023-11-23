@@ -8,7 +8,10 @@ function( ast, idx, type = NA)
 getParent =
 function(ast, idx, type = NA)
 {
-    tmp = getIndexObj(ast, idx, type)
+    if(!inherits(idx, "IndexPath"))
+        idx = mkIndexPath(idx, type)
+    
+    tmp = getIndexObj(ast, idx)
 
     obj = tmp$obj
     for(i in tmp$idx)
@@ -17,6 +20,7 @@ function(ast, idx, type = NA)
     obj
 }
 
+
 getAncestors =
     #
     # Need to enhance to handle when type is NA and the type is the first element
@@ -24,7 +28,10 @@ getAncestors =
     #
 function(ast, idx, type = NA)
 {
-    tmp = getIndexObj(ast, idx, type)
+    if(!inherits(idx, "IndexPath"))
+        idx = mkIndexPath(idx, type)
+    
+    tmp = getIndexObj(ast, idx)
     
     orig = obj = tmp$obj
     idx = tmp$idx
@@ -37,3 +44,19 @@ function(ast, idx, type = NA)
     rev(c(ast, orig, ans))
 }
 
+
+getSiblings =
+function(ast, idx, type = NA, before = TRUE)
+{
+    if(!inherits(idx, "IndexPath"))
+        idx = mkIndexPath(idx, type)
+
+    p = getParent(ast, idx)
+    els = as.list(p)
+    pos = idx[length(idx)]
+
+    if(before)
+        els[ seq_len(pos - 1L) ]
+    else
+        els[ pos + seq_len(length(els) - pos) ]        
+}

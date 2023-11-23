@@ -1,7 +1,7 @@
 insertByIndex =
 function(x, ast, idx, type = NA)
 {
-    tmp = getIndexObj(ast, idx, type)
+    tmp = getIndexObj(ast, idx)
 
     comp = getASTComponent(idx, type)
     comp = if(comp == "") "ast" else sprintf("%s(ast)", comp)
