@@ -1,6 +1,9 @@
 insertByIndex =
-function(x, ast, idx, type = NA)
+function(x, ast, idx, type = NA, rmSrcref = TRUE)
 {
+    if(!inherits(idx, "IndexPath"))
+        idx = mkIndexPath(idx, type)
+    
     tmp = getIndexObj(ast, idx)
 
     comp = getASTComponent(idx, type)
@@ -11,5 +14,9 @@ function(x, ast, idx, type = NA)
     e = parse(text = txt)
 
     val = eval(e, sys.frame(sys.nframe()))
+
+    if(rmSrcref)
+        attr(ast, "srcref") = NULL
+    
     ast
 }
