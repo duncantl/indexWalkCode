@@ -9,13 +9,13 @@
   starting from a specific node in the tree.
 }
 \usage{
-getParent(ast, idx, type = NA)
-getAncestors(ast, idx, self = FALSE, type = NA)
-getSiblings(ast, idx, before = TRUE, type = NA)
+getParent(idx, ast, type = NA)
+getAncestors(idx, ast, self = FALSE, type = NA)
+getSiblings(idx, ast, before = TRUE, type = NA)
 }
 \arguments{
-  \item{ast}{the top-level, entire AST relative to which \code{idx} was computed.}
   \item{idx}{the \code{IndexPath} identifying the node in the tree.}
+  \item{ast}{the top-level, entire AST relative to which \code{idx} was computed.}
   \item{type}{should not be necessary.
     The type passed to the predicate function in calls from \code{\link{indexWalkCode}}}
   \item{self}{a logical value. If \code{TRUE}, \code{getAncestors} includes
@@ -47,11 +47,11 @@ Duncan Temple Lang
    # the if().
    # Note should the if() have a {}, then we have to look at the ancestors, not the direct parent.
    p = function(x, idx, ast, ...) 
-          isCallTo(x, "foo") && isCallTo(getParent(ast, idx), "if")
+          isCallTo(x, "foo") && isCallTo(getParent(idx, ast), "if")
    i = indexWalkCode(f, p)
 
    # We can also use getParent() with the results from indexWalkCode()
-   getByIndex(f, i[[1]])
+   getByIndex(i[[1]], f)
 
 
    # Note should the if() have a {}, then we have to look at the ancestors, not the direct parent.
@@ -65,12 +65,12 @@ Duncan Temple Lang
    }  
 
    p = function(x, idx, ast, ...) 
-          isCallTo(x, "foo") && any(sapply(getAncestors(ast, idx), isCallTo, "if"))
+          isCallTo(x, "foo") && any(sapply(getAncestors(idx, ast), isCallTo, "if"))
 
    i = indexWalkCode(g, p)
    i
 
-   a = rev(getAncestors(g, i[[1]], self = TRUE))
+   a = rev(getAncestors(i[[1]], g, self = TRUE))
    sapply(a, class)
 }
 \keyword{programming}

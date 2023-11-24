@@ -6,7 +6,7 @@ Description: # This is an experiment in creating a version of walkCode() from co
  a) move up the tree, e.g., to check the parent, ancestors and siblings of a node in the predicate
     or after the traversal, and
  b) modify the AST after the travesal by inserting new/updated language objects at a specific location.
-Version: 0.1-0
+Version: 0.2-0
 Author: Duncan Temple Lang, Luke Tierney and R-core for the codetools::walkCode function.
 Maintainer: Duncan Temple Lang <duncan@r-project.org>
 License: GPL-2

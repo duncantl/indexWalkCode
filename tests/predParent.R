@@ -7,7 +7,7 @@ library(indexWalkCode)
 pred2 = function(x, idx, ast, type) {
 #    print(x)
     isSymbol(x, "args") &&
-        isCallTo(p <- getParent(ast, idx, type), "do.call") &&
+        isCallTo(p <- getParent(idx, ast, type), "do.call") &&
         isSymbol(p[[2]], "order" )
 }
 
@@ -16,8 +16,8 @@ source(ff)
 
 idx = indexWalkCode(body(eg3), pred2)
 
-getByIndex(body(eg3), idx[[1]])
-getParent(body(eg3), idx[[1]])
+getByIndex(idx[[1]], body(eg3))
+getParent(idx[[1]], body(eg3))
 
 
 # The following doesn't work.

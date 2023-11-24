@@ -1,12 +1,12 @@
 getByIndex =
-function( ast, idx, type = NA)
+function(idx, ast, type = NA)
 {
-    p = getParent(ast, idx, type)
+    p = getParent(idx, ast, type)
     p[[ idx[ length(idx) ] ]]
 }
 
 getParent =
-function(ast, idx, type = NA)
+function(idx, ast, type = NA)
 {
     if(!inherits(idx, "IndexPath"))
         idx = mkIndexPath(idx, type)
@@ -26,7 +26,7 @@ getAncestors =
     # Need to enhance to handle when type is NA and the type is the first element
     # of idx. Same as getParent().
     #
-function(ast, idx, self = FALSE, type = NA)
+function(idx, ast, self = FALSE, type = NA)
 {
     if(!inherits(idx, "IndexPath"))
         idx = mkIndexPath(idx, type)
@@ -46,12 +46,12 @@ function(ast, idx, self = FALSE, type = NA)
 
 
 getSiblings =
-function(ast, idx, before = TRUE, type = NA)
+function(idx, ast, before = TRUE, type = NA)
 {
     if(!inherits(idx, "IndexPath"))
         idx = mkIndexPath(idx, type)
 
-    p = getParent(ast, idx)
+    p = getParent(idx, ast)
     els = as.list(p)
     pos = idx[length(idx)]
 

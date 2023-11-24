@@ -6,12 +6,12 @@
   in an R language object/abstract syntax tree (AST).
 }
 \usage{
-insertByIndex(x, ast, idx, type = NA, rmSrcref = TRUE)
+insertByIndex(x, idx, ast, type = NA, rmSrcref = TRUE)
 }
 \arguments{
   \item{x}{the new code object/node to be inserted into the AST}
-  \item{ast}{the original AST from which \code{idx} was computed}
   \item{idx}{the \code{IndexPath} identifying the node in the AST.}
+  \item{ast}{the original AST from which \code{idx} was computed}
   \item{rmSrcref}{a logical value that controls whether
     to remove the original \code{srcref} attribute on the AST
     being returned. Without this, printing the resulting code/AST may
@@ -42,9 +42,9 @@ Duncan Temple Lang
 
    f2 = f
    for(i in idx) {
-      k = getByIndex(f2, i)
+      k = getByIndex(i, f2)
       k$otherArg = TRUE
-      f2 = insertByIndex(k, f2, i)
+      f2 = insertByIndex(k, i, f2)
    }
 
    f2

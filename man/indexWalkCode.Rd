@@ -50,8 +50,8 @@ Duncan Temple Lang
    f = indexWalkCode:::mkIndexWalker
    i = indexWalkCode(f,  mkIsCallTo("pred"))
    i
-   getByIndex(f, i[[1]])
-   getParent(f, i[[1]])
+   getByIndex(i[[1]], f)
+   getParent(i[[1]], f)
 }
 \keyword{programming}
 \concept{metaprogramming}

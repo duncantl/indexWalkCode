@@ -6,16 +6,16 @@
   to extract the corresponding element of the AST/code.
 }
 \usage{
-getByIndex(ast, idx, type = NA)
+getByIndex(idx, ast, type = NA)
 }
 \arguments{
-  \item{ast}{the same code object used in the call to \code{\link{indexWalkCode}}
-   to compute the \code{idx}}
- \item{idx}{the \code{IndexPath} or an integer vector giving the sequence of indices to get to
+  \item{idx}{the \code{IndexPath} or an integer vector giving the sequence of indices to get to
    the desired element in the code/language object.  If this is not of class \code{IndexPath},
    the function will create the path using the value of \code{type}.}
- \item{type}{the type argument passed to the predicate function.
- This should be "formals", "body" or ""}
+  \item{ast}{the same code object used in the call to \code{\link{indexWalkCode}}
+   to compute the \code{idx}} 
+  \item{type}{the type argument passed to the predicate function.
+   This should be "formals", "body" or ""}
 }
 \value{
  An element from the code, i.e., a  language object or a literal value.
@@ -35,10 +35,10 @@ Duncan Temple Lang
    }  
 
    p = function(x, idx, ast, ...) 
-          isCallTo(x, "foo") && isCallTo(getParent(ast, idx), "if")
+          isCallTo(x, "foo") && isCallTo(getParent(idx, ast), "if")
    i = indexWalkCode(f, p)
 
-   getByIndex(f, i[[1]])
+   getByIndex(i[[1]], f)
 }
 \keyword{programming}
 \concept{metaprogramming}

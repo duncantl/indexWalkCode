@@ -1,0 +1,5 @@
+0.2-0
+	* Changed the order of parameters/formal arguments for getParent(), getSiblings(),
+	getAncestors(), getByIndex() and insertByIndex() so that the index path is first and the AST
+	is after that.
+	

@@ -1,5 +1,5 @@
 insertByIndex =
-function(x, ast, idx, type = NA, rmSrcref = TRUE)
+function(x, idx, ast, type = NA, rmSrcref = TRUE)
 {
     if(!inherits(idx, "IndexPath"))
         idx = mkIndexPath(idx, type)
