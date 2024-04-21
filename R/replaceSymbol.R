@@ -1,10 +1,11 @@
 replaceSymbol =
-function(fun, sym, with)    
+    # Also see insertByIndex.
+function(fun, sym, with, removeSrcRef = TRUE)    
 {
     # Handle empty symbol which is the default value for a function parameter.
     if(is.symbol(fun) && as.character(fun) == "")
         return(fun)
-    
+
     with = as.name(with)
 
     isFun = is.function(fun)
@@ -27,6 +28,9 @@ function(fun, sym, with)
         formals(fun) = lapply(formals(fun), replaceSymbol, sym, with)
     } else
         fun = code
+
+    if(removeSrcRef)
+        attr(fun, "srcref") = NULL    
 
     fun
 }

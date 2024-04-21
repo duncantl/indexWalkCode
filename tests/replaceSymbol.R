@@ -6,3 +6,11 @@ f = function(x, y = length(x))
 }
 
 replaceSymbol(f, "x", "abc")
+
+
+##########
+
+
+k = parse("walk.R")
+k2 = replaceSymbol(k, "pred", "predicate")
+

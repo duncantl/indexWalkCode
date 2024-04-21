@@ -12,6 +12,9 @@ export(
     getByIndex,
     insertByIndex
 )
+export(replaceSymbol)
+
 
 export(isSymbol, isCallTo, isAssignTo)
+
 
