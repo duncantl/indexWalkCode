@@ -20,7 +20,7 @@ getByIndex(idx[[1]], body(eg3))
 getParent(idx[[1]], body(eg3))
 
 
-# The following doesn't work.
+# [Fixed] The following doesn't work.
 # Error in obj[[i]] : object of type 'closure' is not subsettable
 # In the predicate, we are calling getParent() but the value of idx is a simple
 # vector not an IndexPath.  We need to use the type to call mkIndexPath(idx, type)
