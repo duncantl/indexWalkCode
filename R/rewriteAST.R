@@ -1,4 +1,5 @@
 insertByIndex =
+    # Also see replaceSymbol() for higher level function.
 function(x, idx, ast, type = NA, rmSrcref = TRUE)
 {
     if(!inherits(idx, "IndexPath"))

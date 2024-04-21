@@ -1,6 +1,6 @@
 Package: indexWalkCode
 Title: Walk R code with ability to query up the tree and sideways
-Description: # This is an experiment in creating a version of walkCode() from codetools
+Description:  This is an experiment in creating a version of walkCode() from codetools
  that allows us to collect indices if elements in the AST that match some criteria.
  The intent is to be able to use these indices to
  a) move up the tree, e.g., to check the parent, ancestors and siblings of a node in the predicate
