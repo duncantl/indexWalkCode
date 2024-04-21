@@ -1,6 +1,10 @@
 replaceSymbol =
 function(fun, sym, with)    
 {
+    # Handle empty symbol which is the default value for a function parameter.
+    if(is.symbol(fun) && as.character(fun) == "")
+        return(fun)
+    
     with = as.name(with)
 
     isFun = is.function(fun)
@@ -19,6 +23,8 @@ function(fun, sym, with)
         w = names(formals(fun)) == as.character(sym)
         if(any(w))
             names(formals(fun))[w] = as.character(with)
+
+        formals(fun) = lapply(formals(fun), replaceSymbol, sym, with)
     } else
         fun = code
 
