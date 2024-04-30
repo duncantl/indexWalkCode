@@ -1,6 +1,7 @@
 \name{getParent}
 \alias{getParent}
 \alias{getAncestors}
+\alias{getAncestorFuns}
 \alias{getSiblings}
 \title{Access the code tree, specifically upwards or sideways}
 \description{
@@ -12,10 +13,11 @@
 getParent(idx, ast, type = NA)
 getAncestors(idx, ast, self = FALSE, type = NA)
 getSiblings(idx, ast, before = TRUE, type = NA)
+getAncestorFuns(idx, code)
 }
 \arguments{
   \item{idx}{the \code{IndexPath} identifying the node in the tree.}
-  \item{ast}{the top-level, entire AST relative to which \code{idx} was computed.}
+  \item{ast,code}{the top-level, entire AST relative to which \code{idx} was computed.}
   \item{type}{should not be necessary.
     The type passed to the predicate function in calls from \code{\link{indexWalkCode}}}
   \item{self}{a logical value. If \code{TRUE}, \code{getAncestors} includes
@@ -26,7 +28,9 @@ getSiblings(idx, ast, before = TRUE, type = NA)
 }
 
 \value{
-An R language object or literal value.
+  An R language object or literal value.
+
+  \code{getAncestorFuns} returns a list of language objects.
 }
 \author{
 Duncan Temple Lang
