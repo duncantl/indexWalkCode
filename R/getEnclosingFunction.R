@@ -13,7 +13,7 @@ function(idx, ast, assignment = FALSE)
        return( structure(anc[w], names = sapply(anc[which(w) - 1], getAssignName)  ) )
 
     i = max(which(w))
-browser()    
+
     if(assignment && i < length(anc))
         i = i + 1L 
 
