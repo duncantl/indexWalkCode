@@ -20,4 +20,6 @@ export(isSymbol, isCallTo, isAssignTo)
 
 
 export(hasSymbol, getSymbol,
-       getAncestors, getAncestorFuns)
+       getAncestorFuns)
+
+export(getEnclosingFunction)
