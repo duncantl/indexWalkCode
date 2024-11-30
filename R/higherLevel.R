@@ -1,9 +1,11 @@
 hasSymbol =
 function(code, sym)    
 {
+    #XXXX  needs to be fixed.
+    # Function not currently used.
     #    syms = getAllSymbols(code)
-    length(getSymbol(cod, sym)) > 0
-    sym %in% syms
+    length(getSymbol(code, sym)) > 0
+#    sym %in% syms
 }
 
 # rcode2$"EFRM_constructCommitteeTableForFilingProcess"
