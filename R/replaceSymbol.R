@@ -1,6 +1,6 @@
 replaceSymbol =
     # Also see insertByIndex.
-function(fun, sym, with, removeSrcRef = TRUE)    
+function(fun, sym, with, rmSrcref = TRUE)    
 {
     # Handle empty symbol which is the default value for a function parameter.
     if(is.symbol(fun) && as.character(fun) == "")
@@ -29,7 +29,7 @@ function(fun, sym, with, removeSrcRef = TRUE)
     } else
         fun = code
 
-    if(removeSrcRef)
+    if(rmSrcref)
         attr(fun, "srcref") = NULL    
 
     fun
