@@ -13,7 +13,7 @@
 getParent(idx, ast, type = NA)
 getAncestors(idx, ast, self = FALSE, type = NA)
 getSiblings(idx, ast, before = TRUE, type = NA)
-getAncestorFuns(idx, code)
+getAncestorFuns(idx, code, ...)
 }
 \arguments{
   \item{idx}{the \code{IndexPath} identifying the node in the tree.}
@@ -25,6 +25,7 @@ getAncestorFuns(idx, code)
   \item{before}{a logical value. If \code{TRUE}, \code{getSiblings} returns
     the sibling nodes before the current node; otherwise, the nodes after the current node.
   }
+  \item{\dots}{additional arguments passed to \code{\link[base]{parse}}}
 }
 
 \value{
