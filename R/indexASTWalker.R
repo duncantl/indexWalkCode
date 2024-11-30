@@ -39,7 +39,7 @@ function(pred, ast, collectCode = FALSE, missing = FALSE)
         } else if(ty == "closure") {
             walkCode2(formals(x), w, idx, "formals") 
             walkCode2(body(x), w, idx, "body")
-        } else if(ty == "symbol") {
+        } else if(ty %in% "symbol" || any(class(x) %in% c("character", "integer", "numeric", "logical"))) {
             idx = mkIndexPath(idx, type)
             if(pred(x, idx, ast, type))
                 capture(idx, type, x)
@@ -74,7 +74,7 @@ function(pred, ast, collectCode = FALSE, missing = FALSE)
         }
     }
 
-    list(handler = function(...) NULL,
+    list(handler = function(x, w, ...) NULL,   # { print(x); if(pred(x)) browser()},
          call = call,
          leaf = leaf,
          ans = function() {
