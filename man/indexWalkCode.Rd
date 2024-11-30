@@ -15,7 +15,8 @@
 }
 \usage{
 indexWalkCode(code, pred, collectCode = FALSE, w =
-              mkIndexWalker(pred, code, collectCode))
+              mkIndexWalker(pred, code, collectCode, missing = missing),
+              missing = FALSE)
 }
 \arguments{
   \item{code}{any R code} %  or an environment
@@ -34,6 +35,8 @@ indexWalkCode(code, pred, collectCode = FALSE, w =
     elements the predicate identifies, along with the list of \code{IndexPath}
     objects.
   }
+  \item{missing}{logical scalar controlling whether the code walking functions call the predicate
+    function for missing arguments in a call.}
 }
 \value{
 A list of \code{IndexPath} objects.

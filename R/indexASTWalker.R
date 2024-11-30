@@ -19,14 +19,14 @@ indexWalkCode =
     # The entry point to walk the AST and return the list of IndexPaths
     # 
 function(code, pred, collectCode = FALSE,
-         w = mkIndexWalker(pred, code, collectCode))
+         w = mkIndexWalker(pred, code, collectCode, missing = missing), missing = FALSE)
 {
     walkCode2(code, w, idx = integer(), type = "")
     w$ans()
 }
 
 mkIndexWalker = 
-function(pred, ast, collectCode = FALSE)
+function(pred, ast, collectCode = FALSE, missing = FALSE)
 {
     ans = list()
     code = list()
@@ -66,6 +66,11 @@ function(pred, ast, collectCode = FALSE)
             ee = tmp[[i]]
             if (!missing(ee))
                 walkCode2(ee, w, c(idx, i), type)
+            # Handle missing arguments.
+            else if(missing && pred( , idx, ast, type)) {
+                capture(mkIndexPath(c(idx, i), type), type, x)
+            }
+            
         }
     }
 
