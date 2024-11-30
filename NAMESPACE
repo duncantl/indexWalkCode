@@ -16,7 +16,7 @@ export(replaceSymbol)
 
 
 export(isSymbol, isCallTo, isAssignTo)
-
+export(isFunction, isFunctionAssign)
 
 
 export(hasSymbol, getSymbol,

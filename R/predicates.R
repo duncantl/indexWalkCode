@@ -21,8 +21,20 @@ function (code, funName)
    (is.call(code) || inherits(code, "call")) && isSymbol(code[[1]], funName)
 }
 
+isFunction =
+function(code)    
+{
+    is.function(code) || isCallTo(code, "function")
+}
+
 isAssignTo =
 function (code, varName) 
 {
    inherits(code, c("<-", "=")) && isSymbol(code[[2]], varName)
+}
+
+isFunctionAssign =
+function(code) 
+{
+   inherits(code, c("<-", "=")) && isFunction(code[[3]])
 }

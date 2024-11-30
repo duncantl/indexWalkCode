@@ -3,6 +3,8 @@
 \alias{mkIsCallTo}
 \alias{isAssignTo}
 \alias{isSymbol}
+\alias{isFunction}
+\alias{isFunctionAssign}
 \title{Predicate functions useful for find nodes in R code via \code{indexWalkCode}}
 \description{
   These predicate functions are building blocks to writing
@@ -10,12 +12,21 @@
 
   \code{mkIsCallTo} creates a predicate that tests for a call to any of a set of
   R functions.
+
+
+  \code{isFunction} tests whether the language object is a function or a
+  call to \code{function} which will create a function when evaluated.
+
+  \code{isFunctionAssign} tests for an assignment where the right-hand-side is
+  a call to \code{function}.
 }
 \usage{
 isCallTo(code, funName)
 isSymbol(x, varName)
 isAssignTo(code, varName)
 mkIsCallTo(fun)
+isFunction(code)
+isFunctionAssign(code)
 }
 \arguments{
   \item{x,code}{the R call object}
